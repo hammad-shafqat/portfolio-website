@@ -107,16 +107,27 @@ export default function Hero() {
             <pre className="overflow-x-auto rounded-xl bg-background-secondary p-4 font-mono text-[13px] leading-relaxed">
               <code>
                 <span className="text-fuchsia-500">const</span>{" "}
-                <span className="text-sky-500">dev</span> = {"{"}
+                <span className="text-sky-500">developer</span> = {"{"}
                 {"\n"}
-                {"  "}name: <span className="text-emerald-500">&apos;{profile.firstName}&apos;</span>,
+                {"  "}name: <span className="text-emerald-500">&apos;{profile.name}&apos;</span>,
                 {"\n"}
-                {"  "}stack: [<span className="text-emerald-500">&apos;React&apos;</span>,{" "}
-                <span className="text-emerald-500">&apos;Node&apos;</span>],
+                {"  "}role: <span className="text-emerald-500">&apos;Software Engineer&apos;</span>,
                 {"\n"}
-                {"  "}focus: <span className="text-emerald-500">&apos;great UX&apos;</span>,
+                {"  "}stack: [
+                <span className="text-emerald-500">&apos;TypeScript&apos;</span>,{" "}
+                <span className="text-emerald-500">&apos;MongoDB&apos;</span>,{" "}
+                <span className="text-emerald-500">&apos;PostgreSQL&apos;</span>,{" "}
+                <span className="text-emerald-500">&apos;Express&apos;</span>,{" "}
+                <span className="text-emerald-500">&apos;React&apos;</span>,{" "}
+                <span className="text-emerald-500">&apos;Node.js&apos;</span>,{" "}
+                <span className="text-emerald-500">&apos;Next.js&apos;</span>
+                ],
                 {"\n"}
-                {"  "}<span className="text-sky-500">ships</span>:{" "}
+                {"  "}specializesIn: <span className="text-emerald-500">&apos;Scalable Web Apps&apos;</span>,
+                {"\n"}
+                {"  "}builds: <span className="text-emerald-500">&apos;Fast & Responsive Experiences&apos;</span>,
+                {"\n"}
+                {"  "}<span className="text-sky-500">deploys</span>:{" "}
                 <span className="text-fuchsia-500">() =&gt;</span>{" "}
                 <span className="text-amber-500">true</span>,
                 {"\n"}
