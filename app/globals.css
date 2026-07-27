@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* Drive dark mode from the `data-theme` attribute the inline script sets on
+   <html>, instead of Tailwind's default `prefers-color-scheme`. This lets the
+   toggle override the OS preference. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---- Design tokens ---------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  --background: #ffffff;
+  --background-secondary: #f6f7fb;
+  --card: #ffffff;
+  --card-hover: #f9fafd;
+  --foreground: #0b1120;
+  --muted: #55617a;
+  --border: #e7e9f0;
+  --accent: #6d28d9;
+  --accent-foreground: #ffffff;
+  --ring: rgba(109, 40, 217, 0.35);
+}
+
+/* Dark surfaces mirror Twitter/X's "Dim" theme: a navy-tinted base (#15202b)
+   with lighter elevated cards and #38444d dividers. Accent stays brand purple. */
+[data-theme="dark"] {
+  --background: #15202b;
+  --background-secondary: #1a2836;
+  --card: #1e2732;
+  --card-hover: #22303c;
+  --foreground: #f7f9f9;
+  --muted: #8b98a5;
+  --border: #38444d;
+  --accent: #a78bfa;
+  --accent-foreground: #15202b;
+  --ring: rgba(167, 139, 250, 0.35);
+}
+
+/* Expose tokens as Tailwind color/font utilities (bg-card, text-muted, …). */
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+/* ---- Base ------------------------------------------------------------- */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* offset for the sticky navbar on anchor jumps */
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Themed, slim scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+
+/* ---- Reusable utilities ---------------------------------------------- */
+@utility gradient-text {
+  background-image: linear-gradient(
+    120deg,
+    var(--accent),
+    #8b5cf6 40%,
+    #ec4899
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Scroll-reveal: hidden until the `.in-view` class is added by the observer. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
