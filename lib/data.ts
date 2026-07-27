@@ -1,11 +1,11 @@
 // -----------------------------------------------------------------------------
 // Dummy portfolio content.
-// Replace the values below with your real information — the UI reads everything
+// Replace the values below with your real information - the UI reads everything
 // from this single file, so nothing else needs to change.
 // -----------------------------------------------------------------------------
 
 // Contact details live in `.env` so they aren't hardcoded here. Both must be
-// referenced as full `process.env.NEXT_PUBLIC_*` expressions — Next.js inlines
+// referenced as full `process.env.NEXT_PUBLIC_*` expressions - Next.js inlines
 // them at build time by literal substitution, so a destructured or dynamic
 // lookup (`process.env[name]`) would not be replaced and would be undefined
 // in the browser.
@@ -18,13 +18,13 @@ export const profile = {
   role: "Full Stack Software Engineer",
   tagline: "I build fast, accessible, and scalable web applications.",
   summary:
-    "Full Stack Engineer specializing in the MERN stack and Next.js. I turn ambitious ideas into production-grade products — from pixel-perfect interfaces to resilient APIs and databases that scale.",
+    "Full Stack Engineer specializing in the MERN stack and Next.js. I turn ambitious ideas into production-grade products - from pixel-perfect interfaces to resilient APIs and databases that scale.",
   location: "Islamabad, Pakistan",
   availability: "Contact for freelance & full-time roles",
   email: contactEmail,
   phone: contactPhone,
   resumeUrl: "/resume.pdf",
-  avatar: "", // add a path like "/avatar.jpg" — falls back to initials if empty
+  avatar: "", // add a path like "/avatar.jpg" - falls back to initials if empty
 } as const;
 
 export const socials = [
@@ -172,7 +172,7 @@ export const experiences: Experience[] = [
   {
     role: "Senior Full Stack Engineer",
     company: "Vertex Labs",
-    period: "2023 — Present",
+    period: "2023 - Present",
     location: "Islamabad, Pakistan",
     description:
       "Lead engineer on the core product team, owning architecture decisions across the stack.",
@@ -185,7 +185,7 @@ export const experiences: Experience[] = [
   {
     role: "Full Stack Developer",
     company: "Brightwave Studio",
-    period: "2021 — 2023",
+    period: "2021 - 2023",
     location: "Remote",
     description:
       "Built and shipped client web apps end-to-end for startups and agencies.",
@@ -198,7 +198,7 @@ export const experiences: Experience[] = [
   {
     role: "Frontend Developer",
     company: "Pixel & Co.",
-    period: "2020 — 2021",
+    period: "2020 - 2021",
     location: "Manchester, UK",
     description:
       "Focused on crafting responsive, accessible interfaces for marketing sites and dashboards.",

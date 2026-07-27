@@ -45,7 +45,7 @@ export default function About() {
               <p>
                 I&apos;m a full stack engineer based in {profile.location}, with
                 a passion for building web applications that are fast, reliable,
-                and a joy to use. I care deeply about the details — clean code,
+                and a joy to use. I care deeply about the details - clean code,
                 thoughtful UX, and performance that holds up under real-world
                 load.
               </p>

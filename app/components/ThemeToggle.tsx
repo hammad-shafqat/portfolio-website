@@ -38,7 +38,7 @@ export default function ThemeToggle() {
     try {
       localStorage.setItem("theme", next);
     } catch {
-      /* localStorage may be unavailable — ignore */
+      /* localStorage may be unavailable - ignore */
     }
     window.dispatchEvent(new Event(THEME_EVENT));
   }

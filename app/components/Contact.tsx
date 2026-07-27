@@ -28,7 +28,7 @@ export default function Contact() {
               </h2>
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
                 Have a project in mind or just want to say hi? My inbox is always
-                open — I&apos;ll get back to you within a day or two.
+                open - I&apos;ll get back to you within a day or two.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
