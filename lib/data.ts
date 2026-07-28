@@ -95,7 +95,11 @@ export type Project = {
   repoUrl?: string;
   featured?: boolean;
   year: string;
-  accent: string; // used for the card's gradient thumbnail
+  accent: string; // gradient fallback shown when `image` is empty
+  // Screenshot for the card thumbnail. Put the file in `public/` and reference
+  // it from the base URL, e.g. "/project_1_demo.png". Remote URLs need a
+  // matching `images.remotePatterns` entry in `next.config.ts`.
+  image?: string;
 };
 
 export const projects: Project[] = [
@@ -104,11 +108,12 @@ export const projects: Project[] = [
     description:
       "A real-time analytics dashboard processing millions of events per day. Built a streaming pipeline with WebSockets and a virtualized data grid that stays smooth at scale.",
     tags: ["Next.js", "TypeScript", "WebSockets", "PostgreSQL"],
-    liveUrl: "#",
+    liveUrl: "https://test-vizionautos.netlify.app",
     repoUrl: "#",
     featured: true,
     year: "2025",
     accent: "from-indigo-500 to-violet-500",
+    image: "/project_1_demo.png",
   },
   {
     title: "Orbit Commerce",

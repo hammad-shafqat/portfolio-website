@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { projects, type Project } from "@/lib/data";
 import { ArrowUpRight, Github } from "./icons";
 import Reveal from "./Reveal";
@@ -18,13 +19,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         }`}
       >
         <div
-          className={`flex aspect-[16/10] items-center justify-center bg-gradient-to-br ${project.accent}`}
+          className={`relative flex aspect-[16/10] items-center justify-center bg-gradient-to-br ${project.accent}`}
         >
-          <span className="font-mono text-2xl font-bold tracking-tight text-white/90">
-            {project.title}
-          </span>
+          {project.image ? (
+            // `fill` needs a positioned parent - the aspect box above provides
+            // both the ratio and the `relative` container.
+            <Image
+              src={project.image}
+              alt={`${project.title}`}
+              fill
+              sizes={
+                project.featured
+                  ? "(min-width: 1024px) 576px, (min-width: 640px) 90vw, 100vw"
+                  : "(min-width: 1024px) 384px, (min-width: 640px) 90vw, 100vw"
+              }
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <span className="font-mono text-2xl font-bold tracking-tight text-white/90">
+              {project.title}
+            </span>
+          )}
         </div>
-        <span className="absolute right-3 top-3 rounded-full bg-black/25 px-2.5 py-1 font-mono text-xs text-white backdrop-blur-sm">
+        <span className="absolute right-3 top-3 rounded-full bg-accent px-2.5 py-1 font-mono text-xs text-white backdrop-blur-sm">
           {project.year}
         </span>
       </div>
