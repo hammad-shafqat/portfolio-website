@@ -24,7 +24,7 @@ export const profile = {
   email: contactEmail,
   phone: contactPhone,
   resumeUrl: "/resume.pdf",
-  avatar: "", // add a path like "/avatar.jpg" - falls back to initials if empty
+  avatar: "/profile.jpeg", // add a path like "/avatar.jpg" - falls back to initials if empty
 } as const;
 
 export const socials = [
@@ -35,10 +35,10 @@ export const socials = [
 ] as const;
 
 export const stats = [
-  { value: "5+", label: "Years experience" },
-  { value: "40+", label: "Projects shipped" },
-  { value: "25+", label: "Happy clients" },
-  { value: "12", label: "Open-source repos" },
+  { value: "2+", label: "Years experience" },
+  { value: "5+", label: "Projects shipped" },
+  { value: "2", label: "Professional roles" },
+  { value: "3+", label: "Happy clients" },
 ] as const;
 
 export type SkillGroup = {
@@ -52,12 +52,15 @@ export const skillGroups: SkillGroup[] = [
     title: "Frontend",
     icon: "layout",
     skills: [
+      "TypeScript",
       "React",
       "Next.js",
-      "TypeScript",
       "Tailwind CSS",
+      "Zustand",
+      "Redux",
       "Redux Toolkit",
       "Framer Motion",
+      "TanStack Query"
     ],
   },
   {
@@ -67,20 +70,20 @@ export const skillGroups: SkillGroup[] = [
       "Node.js",
       "Express.js",
       "REST APIs",
-      "GraphQL",
+      "Stripe API",
+      "Next.js API Routes",
       "WebSockets",
-      "tRPC",
     ],
   },
   {
     title: "Database & Cloud",
     icon: "database",
-    skills: ["MongoDB", "PostgreSQL", "Prisma", "Redis", "AWS", "Docker"],
+    skills: ["MongoDB", "Mongoose" , "PostgreSQL", "Prisma", "Redis"],
   },
   {
     title: "Tooling & Practices",
     icon: "wrench",
-    skills: ["Git", "CI/CD", "Jest", "Playwright", "Figma", "Agile / Scrum"],
+    skills: ["Git", "GitHub", "Jira",  "Vercel", "Netlify", "Cloudinary", "Stripe"],
   },
 ];
 
@@ -225,7 +228,7 @@ export const services: Service[] = [
   {
     title: "API & Backend Systems",
     description:
-      "Robust, well-documented REST and GraphQL APIs designed to scale with your product.",
+      "Robust, well-documented REST APIs designed to scale with your product.",
     icon: "server",
   },
   {
