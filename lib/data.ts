@@ -35,7 +35,7 @@ export const socials = [
 ] as const;
 
 export const stats = [
-  { value: "2+", label: "Years experience" },
+  { value: "1.5+", label: "Years experience" },
   { value: "5+", label: "Projects shipped" },
   { value: "2", label: "Professional roles" },
   { value: "3+", label: "Happy clients" },
@@ -78,12 +78,12 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Database & Cloud",
     icon: "database",
-    skills: ["MongoDB", "Mongoose" , "PostgreSQL", "Prisma", "Redis"],
+    skills: ["MongoDB", "Mongoose", "PostgreSQL", "Prisma", "Redis"],
   },
   {
     title: "Tooling & Practices",
     icon: "wrench",
-    skills: ["Git", "GitHub", "Jira",  "Vercel", "Netlify", "Cloudinary", "Stripe"],
+    skills: ["Git", "GitHub", "Jira", "Vercel", "Netlify", "Cloudinary", "Stripe"],
   },
 ];
 
@@ -104,37 +104,50 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Nimbus Analytics",
+    title: "Vizion Autos",
     description:
-      "A real-time analytics dashboard processing millions of events per day. Built a streaming pipeline with WebSockets and a virtualized data grid that stays smooth at scale.",
-    tags: ["Next.js", "TypeScript", "WebSockets", "PostgreSQL"],
+      "Vizion Autos is a UK vehicle marketplace where private sellers and dealers list cars for sale, while buyers browse, filter, and save listings. It features detailed vehicle ads, dealer profiles with reviews, Stripe-powered priority listing packages, email-verified authentication, favourites, address lookup, and automatic ad expiry.",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "TanStack Query",
+      "Zustand",
+      "MongoDB",
+      "Stripe",
+      "Digital Ocean",
+      "Framer Motion",
+    ],
     liveUrl: "https://test-vizionautos.netlify.app",
-    repoUrl: "#",
+    repoUrl: "https://test-vizionautos.netlify.app",
     featured: true,
-    year: "2025",
+    year: "2026",
     accent: "from-indigo-500 to-violet-500",
     image: "/project_1_demo.png",
   },
   {
-    title: "Orbit Commerce",
+    title: "Vizion Autos Dealer Dashboard",
     description:
-      "Headless e-commerce platform with Stripe checkout, inventory sync, and an admin CMS. Cut page load times by 60% with edge rendering and image optimization.",
-    tags: ["React", "Node.js", "Stripe", "MongoDB"],
-    liveUrl: "#",
-    repoUrl: "#",
+      "A subscription-based dealership management platform for a UK automotive marketplace. Dealers post detailed vehicle ads, track analytics, and respond to reviews under Stripe-enforced plan quotas, while admins onboard dealerships - backed by role-based auth, two-factor login, and Redis-cached session validation.",
+    tags: ["Next", "Node.js", "Stripe", "MongoDB", "Redis", "TanStack Query", "Material UI", "Nodemailer", "Digital Ocean", "Netlify"],
+    liveUrl: "https://dealer-vizionautos.netlify.app/",
+    repoUrl: "https://dealer-vizionautos.netlify.app/",
     featured: true,
-    year: "2024",
+    year: "2026",
     accent: "from-sky-500 to-cyan-400",
+    image: "/project_2_demo.jpg",
   },
   {
-    title: "Taskly",
+    title: "Stay In",
     description:
       "Collaborative project management app with realtime boards, role-based access, and offline-first sync. Powers teams with drag-and-drop workflows.",
     tags: ["Next.js", "tRPC", "Prisma", "Redis"],
     liveUrl: "#",
-    repoUrl: "#",
-    year: "2024",
+    repoUrl: "https://github.com/hammad-shafqat/stay-in",
+    featured: true,
+    year: "2022",
     accent: "from-emerald-500 to-teal-400",
+    image: "/project_3_demo.jpg",
   },
   {
     title: "Lumen UI",
@@ -146,25 +159,7 @@ export const projects: Project[] = [
     year: "2023",
     accent: "from-amber-500 to-orange-500",
   },
-  {
-    title: "Pulse Chat",
-    description:
-      "End-to-end encrypted messaging app with typing indicators, read receipts, and media sharing. Scaled to 10k concurrent connections.",
-    tags: ["Socket.io", "Express", "MongoDB", "AWS"],
-    liveUrl: "#",
-    repoUrl: "#",
-    year: "2023",
-    accent: "from-rose-500 to-pink-500",
-  },
-  {
-    title: "DevFolio CLI",
-    description:
-      "A command-line tool that scaffolds developer portfolios from a config file. Published to npm with 8k monthly downloads.",
-    tags: ["Node.js", "TypeScript", "Ink", "npm"],
-    repoUrl: "#",
-    year: "2022",
-    accent: "from-fuchsia-500 to-purple-500",
-  },
+
 ];
 
 export type Experience = {
@@ -177,44 +172,46 @@ export type Experience = {
 };
 
 export const experiences: Experience[] = [
-  {
-    role: "Senior Full Stack Engineer",
-    company: "Vertex Labs",
-    period: "2023 - Present",
+ {
+    role: "Full Stack Engineer",
+    company: "Vizion Autos",
+    period: "Jan, 2026 - Present",
     location: "Islamabad, Pakistan",
     description:
-      "Lead engineer on the core product team, owning architecture decisions across the stack.",
+      "Core full-stack engineer building two production platforms for a UK vehicle marketplace: a consumer car-listing site and a subscription-based dealership management portal.",
     highlights: [
-      "Migrated a monolith to a modular Next.js architecture, improving build times by 45%.",
-      "Mentored 4 engineers and established the team's code review and testing standards.",
-      "Designed a caching layer that reduced average API latency from 320ms to 90ms.",
+      "Shipped the consumer marketplace end-to-end - detailed vehicle ads, dealer profiles with reviews, favourites, address lookup, and automatic ad expiry.",
+      "Built the dealer portal with inventory management, ad posting, analytics dashboards, and admin tooling for onboarding dealerships and moderating reviews.",
+      "Implemented a tiered subscription model where each package unlocks a distinct feature set and usage limits, gating dealer capabilities by their active plan.",
+      "Integrated a full Stripe payment system - checkout, subscriptions, plan upgrades/downgrades, and webhook-driven quota enforcement tied to each package.",
+      "Designed the full auth layer with role-based access control (consumer, dealer, admin), email-verified signup, and two-factor login, plus Redis-cached session validation and a MongoDB/Mongoose data layer built for scale.",
     ],
   },
   {
     role: "Full Stack Developer",
-    company: "Brightwave Studio",
-    period: "2021 - 2023",
-    location: "Remote",
+    company: "Decimal Solution",
+    period: "Feb, 2025 - May, 2025",
+    location: "Islamabad, Pakistan",
     description:
-      "Built and shipped client web apps end-to-end for startups and agencies.",
+      "Built responsive, data-driven UI and integrated backend APIs across the HR, inventory, and admin modules of an internal management platform.",
     highlights: [
-      "Delivered 20+ production apps with React, Node.js, and MongoDB.",
-      "Introduced CI/CD pipelines that cut deployment time from hours to minutes.",
-      "Collaborated directly with designers to build a reusable component system.",
+      "Developed the inventory and admin modules with Next.js and Tailwind CSS, including dynamic dashboards with real-time data visualization.",
+      "Integrated REST APIs and handled data fetching and state management for seamless frontend-backend communication.",
+      "Implemented secure authentication and role-based access control to protect application routes across user roles.",
     ],
   },
-  {
-    role: "Frontend Developer",
-    company: "Pixel & Co.",
-    period: "2020 - 2021",
-    location: "Manchester, UK",
-    description:
-      "Focused on crafting responsive, accessible interfaces for marketing sites and dashboards.",
-    highlights: [
-      "Rebuilt the flagship marketing site, boosting Lighthouse scores to 98+.",
-      "Implemented an internationalization system supporting 6 languages.",
-    ],
-  },
+  // {
+  //   role: "Frontend Developer",
+  //   company: "Pixel & Co.",
+  //   period: "2020 - 2021",
+  //   location: "Manchester, UK",
+  //   description:
+  //     "Focused on crafting responsive, accessible interfaces for marketing sites and dashboards.",
+  //   highlights: [
+  //     "Rebuilt the flagship marketing site, boosting Lighthouse scores to 98+.",
+  //     "Implemented an internationalization system supporting 6 languages.",
+  //   ],
+  // },
 ];
 
 export type Service = {

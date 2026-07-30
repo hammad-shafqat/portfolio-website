@@ -29,7 +29,7 @@ export default function About() {
                 )}
               </div>
               <div className="absolute -bottom-5 -right-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-xl shadow-black/5">
-                <div className="text-2xl font-bold gradient-text">2+ yrs</div>
+                <div className="text-2xl font-bold gradient-text">1.5+yrs</div>
                 <div className="text-xs text-muted">of building</div>
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function About() {
                 load.
               </p>
               <p>
-                Over the last 2+ years I&apos;ve worked on freelaunce projects also with startups and
+                Over the last 1.5+years I&apos;ve worked on freelaunce projects also with startups and
                 agencies to ship products end-to-end: designing APIs, modelling
                 data, and crafting interfaces that feel effortless. I thrive in
                 collaborative teams and love mentoring other developers.

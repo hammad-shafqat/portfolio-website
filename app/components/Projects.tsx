@@ -25,16 +25,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             // `fill` needs a positioned parent - the aspect box above provides
             // both the ratio and the `relative` container.
             <Image
-              src={project.image}
-              alt={`${project.title}`}
-              fill
-              sizes={
-                project.featured
-                  ? "(min-width: 1024px) 576px, (min-width: 640px) 90vw, 100vw"
-                  : "(min-width: 1024px) 384px, (min-width: 640px) 90vw, 100vw"
-              }
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
+  src={project.image}
+  alt={project.title}
+  fill
+  sizes={
+    project.featured
+      ? "(min-width: 1024px) 576px, (min-width: 640px) 90vw, 100vw"
+      : "(min-width: 1024px) 384px, (min-width: 640px) 90vw, 100vw"
+  }
+  className="object-cover transition-transform duration-300 group-hover:scale-105"
+/>
           ) : (
             <span className="font-mono text-2xl font-bold tracking-tight text-white/90">
               {project.title}

@@ -12,7 +12,7 @@ export default function Experience() {
         <SectionHeading
           eyebrow="Career"
           title="Where I've worked"
-          description="Five years of shipping products, leading teams, and growing as an engineer."
+          description="Building scalable products, delivering full-stack solutions, and continuously growing."
         />
 
         <ol className="relative mt-14 border-l border-border pl-8 sm:pl-10">
