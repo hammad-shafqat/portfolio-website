@@ -73,6 +73,7 @@ export const skillGroups: SkillGroup[] = [
       "Stripe API",
       "Next.js API Routes",
       "WebSockets",
+      "Socket.IO",
     ],
   },
   {
@@ -153,7 +154,7 @@ export const projects: Project[] = [
     title: "Work Syn Pro",
     description:
       "An open-source, accessible React component library with 40+ components, dark mode, and full keyboard support. 1.2k stars and growing.",
-    tags: ["Node.js", "Express.js"],
+    tags: [ "JavaScript", "Node.js", "Express.js", "MongoDB", "Mongoose"],
     // liveUrl: "https://github.com/hammad-shafqat/worksyncpro",
     repoUrl: "https://github.com/hammad-shafqat/worksyncpro",
     year: "2026",

@@ -2,6 +2,7 @@ import { skillGroups } from "@/lib/data";
 import { iconMap, type IconKey } from "./icons";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
+import { getTechMonogram, techLogos } from "./techLogos";
 
 export default function Skills() {
   return (
@@ -32,15 +33,35 @@ export default function Skills() {
                   </div>
                   <h3 className="font-semibold">{group.title}</h3>
                 </div>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {group.skills.map((skill) => (
-                    <li
-                      key={skill}
-                      className="rounded-full border border-border bg-background px-3 py-1 text-sm text-muted transition-colors hover:border-accent/50 hover:text-foreground"
-                    >
-                      {skill}
-                    </li>
-                  ))}
+                <ul className="mt-5 flex flex-wrap gap-2.5">
+                  {group.skills.map((skill) => {
+                    const Logo = techLogos[skill];
+                    return (
+                      <li key={skill} className="group/tech relative">
+                        <div className="grid h-11 w-11 place-items-center rounded-xl border border-border bg-background text-muted transition-colors group-hover/tech:border-accent/50 group-hover/tech:text-accent">
+                          {Logo ? (
+                            <Logo className="h-5 w-5" aria-hidden />
+                          ) : (
+                            <span
+                              aria-hidden
+                              className="text-sm font-semibold tracking-tight"
+                            >
+                              {getTechMonogram(skill)}
+                            </span>
+                          )}
+                          <span className="sr-only">{skill}</span>
+                        </div>
+
+                        {/* Name on hover, since the tile itself shows only the logo */}
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg border border-border bg-card px-2 py-1 text-xs font-medium text-foreground opacity-0 shadow-lg transition-opacity group-hover/tech:opacity-100"
+                        >
+                          {skill}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </Reveal>
             );
