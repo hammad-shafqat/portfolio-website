@@ -9,15 +9,15 @@ export default function About() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           {/* Left: portrait / initials card */}
-          <Reveal className="lg:sticky lg:top-28 lg:self-start">
-            <div className="relative">
+          <Reveal variant="scale" className="lg:sticky lg:top-28 lg:self-start">
+            <div className="group relative">
               <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-accent/15 via-card to-fuchsia-500/10">
                 {profile.avatar ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={profile.avatar}
                     alt={profile.name}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />
                 ) : (
                   <div className="grid h-full w-full place-items-center">
@@ -28,7 +28,7 @@ export default function About() {
                   </div>
                 )}
               </div>
-              <div className="absolute -bottom-5 -right-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-xl shadow-black/5">
+              <div className="animate-float absolute -bottom-5 -right-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-xl shadow-black/5">
                 <div className="text-2xl font-bold gradient-text">1.5+yrs</div>
                 <div className="text-xs text-muted">of building</div>
               </div>
@@ -41,7 +41,10 @@ export default function About() {
               eyebrow="About me"
               title="Turning complex problems into elegant products."
             />
-            <Reveal className="mt-6 space-y-4 text-base leading-relaxed text-muted">
+            <Reveal
+              variant="blur"
+              className="mt-6 space-y-4 text-base leading-relaxed text-muted"
+            >
               <p>
                 I&apos;m a full stack engineer based in {profile.location}, with
                 a passion for building web applications that are fast, reliable,
@@ -50,7 +53,7 @@ export default function About() {
                 load.
               </p>
               <p>
-                Over the last 1.5+years I&apos;ve worked on freelaunce projects also with startups and
+                Over the last 1.5+years I&apos;ve worked on freelance projects also with startups and
                 agencies to ship products end-to-end: designing APIs, modelling
                 data, and crafting interfaces that feel effortless. I thrive in
                 collaborative teams and love mentoring other developers.
@@ -64,9 +67,10 @@ export default function About() {
                   <Reveal
                     key={service.title}
                     delay={i * 80}
-                    className="group rounded-2xl border border-border bg-card p-5 transition-colors hover:border-accent/40 hover:bg-card-hover"
+                    spotlight
+                    className="group rounded-2xl border border-border bg-card p-5 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card-hover"
                   >
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent transition-transform group-hover:scale-110">
+                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="mt-4 font-semibold">{service.title}</h3>

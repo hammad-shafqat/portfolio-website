@@ -21,7 +21,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={s.label}
-                  className="grid h-9 w-9 place-items-center rounded-full border border-border text-foreground transition-colors hover:border-accent hover:text-accent"
+                  className="grid h-9 w-9 place-items-center rounded-full border border-border text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
                 >
                   <Icon className="h-[18px] w-[18px]" />
                 </a>

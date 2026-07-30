@@ -25,20 +25,25 @@ export default function Skills() {
               <Reveal
                 key={group.title}
                 delay={i * 80}
-                className="rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/40"
+                spotlight
+                className="group rounded-2xl border border-border bg-card p-6 hover:border-accent/40"
               >
                 <div className="flex items-center gap-3">
-                  <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent">
+                  <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110">
                     <Icon className="h-5 w-5" />
                   </div>
                   <h3 className="font-semibold">{group.title}</h3>
                 </div>
                 <ul className="mt-5 flex flex-wrap gap-2.5">
-                  {group.skills.map((skill) => {
+                  {group.skills.map((skill, j) => {
                     const Logo = techLogos[skill];
                     return (
-                      <li key={skill} className="group/tech relative">
-                        <div className="grid h-11 w-11 place-items-center rounded-xl border border-border bg-background text-muted transition-colors group-hover/tech:border-accent/50 group-hover/tech:text-accent">
+                      <li
+                        key={skill}
+                        style={{ "--i": j } as React.CSSProperties}
+                        className="stagger-item group/tech relative"
+                      >
+                        <div className="grid h-11 w-11 place-items-center rounded-xl border border-border bg-background text-muted transition-[color,border-color,transform] duration-300 group-hover/tech:-translate-y-0.5 group-hover/tech:border-accent/50 group-hover/tech:text-accent">
                           {Logo ? (
                             <Logo className="h-5 w-5" aria-hidden />
                           ) : (
@@ -55,7 +60,7 @@ export default function Skills() {
                         {/* Name on hover, since the tile itself shows only the logo */}
                         <span
                           aria-hidden
-                          className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg border border-border bg-card px-2 py-1 text-xs font-medium text-foreground opacity-0 shadow-lg transition-opacity group-hover/tech:opacity-100"
+                          className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 translate-y-1 whitespace-nowrap rounded-lg border border-border bg-card px-2 py-1 text-xs font-medium text-foreground opacity-0 shadow-lg transition-all duration-200 group-hover/tech:translate-y-0 group-hover/tech:opacity-100"
                         >
                           {skill}
                         </span>

@@ -62,7 +62,7 @@ export default function Navbar() {
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
           <a href="#top" className="group flex items-center gap-2 font-semibold">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-mono text-sm text-accent-foreground shadow-sm">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-mono text-sm text-accent-foreground shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3">
               <Image
                 src="/hammad-logo.png"
                 width={500}
@@ -85,7 +85,8 @@ export default function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${isActive
+                    data-active={isActive}
+                    className={`nav-underline relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${isActive
                         ? "text-accent"
                         : "text-muted hover:text-foreground"
                       }`}
@@ -100,7 +101,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="#contact"
-              className="hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5 sm:inline-block"
+              className="hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5 active:scale-95 sm:inline-block"
             >
               Let&apos;s talk
             </a>
@@ -155,15 +156,20 @@ export default function Navbar() {
         </div>
 
         <ul className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
-          {navLinks.map((link) => {
+          {navLinks.map((link, i) => {
             const isActive = active === link.href.slice(1);
             return (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className={`block rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-card-hover hover:text-foreground ${isActive ? "text-accent" : "text-muted"
-                    }`}
+                  // Links cascade in behind the drawer panel, and collapse
+                  // together (no delay) on the way out.
+                  style={{
+                    transitionDelay: open ? `${140 + i * 45}ms` : "0ms",
+                  }}
+                  className={`block rounded-lg px-3 py-3 text-base font-medium transition-all duration-300 hover:bg-card-hover hover:text-foreground ${isActive ? "text-accent" : "text-muted"
+                    } ${open ? "translate-x-0 opacity-100" : "translate-x-5 opacity-0"}`}
                 >
                   {link.label}
                 </a>

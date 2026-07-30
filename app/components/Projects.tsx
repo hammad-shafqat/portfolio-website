@@ -8,7 +8,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <Reveal
       delay={(index % 3) * 90}
-      className={`group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-black/5 ${
+      variant={index % 2 === 0 ? "left" : "right"}
+      spotlight
+      className={`group flex flex-col overflow-hidden rounded-2xl border border-border bg-card hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-black/5 ${
         project.featured ? "lg:col-span-3 lg:flex-row" : ""
       }`}
     >
@@ -107,7 +109,7 @@ export default function Projects() {
             title="Projects I'm proud of"
             description="A mix of client work, side projects, and open source. Each one taught me something new."
           />
-          <Reveal>
+          <Reveal variant="right">
             <a
               href="https://github.com/hammad-shafqat"
               target="_blank"

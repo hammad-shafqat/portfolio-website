@@ -10,11 +10,11 @@ export default function Contact() {
           {/* Decorative glow */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-[100px]"
+            className="animate-drift pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-[100px]"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-[100px]"
+            className="animate-drift-slow pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-[100px]"
           />
 
           <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -24,7 +24,7 @@ export default function Contact() {
               </span>
               <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
                 Let&apos;s build something{" "}
-                <span className="gradient-text">great together.</span>
+                <span className="gradient-text-flow">great together.</span>
               </h2>
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
                 Have a project in mind or just want to say hi? My inbox is always
@@ -34,10 +34,10 @@ export default function Contact() {
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
                   href={`mailto:${profile.email}`}
-                  className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-y-0.5"
+                  className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground shadow-lg shadow-accent/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/30 active:scale-95"
                 >
                   Say hello
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
                 <div className="flex items-center gap-1">
                   {socials.map((s) => {
@@ -49,7 +49,7 @@ export default function Contact() {
                         target="_blank"
                         rel="noreferrer noopener"
                         aria-label={s.label}
-                        className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground transition-colors hover:border-accent hover:text-accent"
+                        className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
                       >
                         <Icon className="h-[18px] w-[18px]" />
                       </a>
@@ -100,8 +100,8 @@ function ContactRow({
   href?: string;
 }) {
   const content = (
-    <div className="flex items-center gap-4">
-      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent">
+    <div className="group flex items-center gap-4">
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110">
         {icon}
       </span>
       <div className="min-w-0">

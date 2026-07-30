@@ -16,6 +16,13 @@ export default function Experience() {
         />
 
         <ol className="relative mt-14 border-l border-border pl-8 sm:pl-10">
+          {/* Accent rule that draws down over the static border as the list
+              scrolls into view. `-left-px` lines it up with that border. */}
+          <Reveal
+            variant="line"
+            className="absolute -left-px top-0 h-full w-px bg-gradient-to-b from-accent via-accent/60 to-transparent"
+          />
+
           {experiences.map((exp, i) => (
             <Reveal
               as="li"
@@ -24,7 +31,7 @@ export default function Experience() {
               className="relative pb-12 last:pb-0"
             >
               {/* Node on the line */}
-              <span className="absolute -left-[41px] top-1 grid h-5 w-5 place-items-center rounded-full border border-border bg-background sm:-left-[49px]">
+              <span className="node-ping absolute -left-[41px] top-1 grid h-5 w-5 place-items-center rounded-full border border-border bg-background sm:-left-[49px]">
                 <span className="h-2 w-2 rounded-full bg-accent" />
               </span>
 

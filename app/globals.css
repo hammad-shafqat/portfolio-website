@@ -51,6 +51,8 @@
 
   --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-drift-slow: drift-alt 24s ease-in-out infinite;
 }
 
 /* ---- Base ------------------------------------------------------------- */
@@ -98,18 +100,160 @@ html {
   color: transparent;
 }
 
-/* Scroll-reveal: hidden until the `.in-view` class is added by the observer. */
+@utility gradient-text-flow {
+  /* Same ramp as `gradient-text` but oversized, so shifting the background
+     position drifts the hues across the glyphs instead of just sliding. */
+  background-image: linear-gradient(
+    120deg,
+    var(--accent),
+    #8b5cf6 30%,
+    #ec4899 50%,
+    #8b5cf6 70%,
+    var(--accent)
+  );
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient-flow 9s ease-in-out infinite;
+}
+
+/* Scroll-reveal: hidden until the `.in-view` class is added by the observer.
+   `data-variant` picks the direction/character of the entrance; every variant
+   resolves to the same `transform: none` end state. */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
+  /* This rule is unlayered, so it wins over any Tailwind `transition-*`
+     utility on the same element. Colour and shadow are therefore listed here
+     too, otherwise hover states on a revealed card would snap. */
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
+}
+/* Once it has landed, hover feedback should be quick and undelayed. */
+.reveal.in-view:hover {
+  transition-duration: 0.35s;
+  transition-delay: 0ms;
+}
+.reveal[data-variant="left"] {
+  transform: translate3d(-28px, 0, 0);
+}
+.reveal[data-variant="right"] {
+  transform: translate3d(28px, 0, 0);
+}
+.reveal[data-variant="scale"] {
+  transform: scale(0.94);
+}
+.reveal[data-variant="blur"] {
+  transform: translateY(14px);
+  filter: blur(10px);
+}
+/* Draws a vertical rule downwards - used for the experience timeline. */
+.reveal[data-variant="line"] {
+  opacity: 1;
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition-duration: 1.5s;
 }
 .reveal.in-view {
   opacity: 1;
   transform: none;
+  filter: none;
+}
+
+/* Children of a `.reveal` that cascade in after the container lands. Set
+   `--i` per item (an index) to space them out. */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  /* Colours are included here because this rule is unlayered and would
+     otherwise override a Tailwind `transition-colors` on the same element. */
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  transition-delay: calc(var(--i, 0) * 45ms + 140ms);
+}
+.reveal.in-view .stagger-item {
+  opacity: 1;
+  transform: none;
+}
+/* Once revealed, drop the entrance delay so hover feedback is immediate. */
+.reveal.in-view .stagger-item:hover {
+  transition-delay: 0ms;
+}
+
+/* Above-the-fold entrance that plays on load rather than on scroll. */
+.hero-item {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* Cursor-following highlight for cards. The pseudo-element sits at z-index -1
+   so it paints over the card's own background but under its content, and
+   `isolation` keeps it from escaping behind an ancestor. */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--spot-x, 50%) var(--spot-y, 0%),
+    color-mix(in srgb, var(--accent) 14%, transparent),
+    transparent 72%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* One-shot halo behind a timeline node as it reveals. */
+.node-ping::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--accent);
+  opacity: 0;
+}
+.reveal.in-view .node-ping::after {
+  animation: ping-once 1.4s cubic-bezier(0, 0, 0.2, 1) 0.25s;
+}
+
+/* Animated underline for the active/hovered nav link. */
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  bottom: 0.3rem;
+  left: 50%;
+  height: 2px;
+  width: 0;
+  translate: -50% 0;
+  border-radius: 9999px;
+  background: var(--accent);
+  transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-underline:hover::after {
+  width: 38%;
+}
+.nav-underline[data-active="true"]::after {
+  width: 55%;
 }
 
 @keyframes fade-up {
@@ -133,14 +277,72 @@ html {
   }
 }
 
+/* Slow, wandering motion for the blurred background blobs. */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(4%, 6%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-5%, -3%, 0) scale(0.95);
+  }
+}
+
+@keyframes drift-alt {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-6%, 8%, 0) scale(1.12);
+  }
+}
+
+@keyframes gradient-flow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes ping-once {
+  0% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .reveal {
+  .reveal,
+  .reveal[data-variant] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .stagger-item {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .hero-item {
+    animation: none;
+  }
+  .spotlight::before {
+    display: none;
   }
   *,
   *::before,

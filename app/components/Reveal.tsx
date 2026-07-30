@@ -1,13 +1,28 @@
 "use client";
 
-import { useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ElementType,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
+
+/** Entrance styles; the matching CSS lives under `.reveal[data-variant=…]`. */
+export type RevealVariant = "up" | "left" | "right" | "scale" | "blur" | "line";
 
 type RevealProps = {
-  children: ReactNode;
+  children?: ReactNode;
   as?: ElementType;
   className?: string;
   /** Stagger delay in ms, useful when mapping over a list. */
   delay?: number;
+  /** Direction/character of the entrance. Defaults to a slide up. */
+  variant?: RevealVariant;
+  /** Adds a soft accent glow that follows the cursor across the element. */
+  spotlight?: boolean;
 };
 
 /**
@@ -19,6 +34,8 @@ export default function Reveal({
   as: Tag = "div",
   className = "",
   delay = 0,
+  variant = "up",
+  spotlight = false,
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -47,11 +64,28 @@ export default function Reveal({
     return () => observer.disconnect();
   }, []);
 
+  // Track the pointer as CSS custom properties so the highlight is positioned
+  // by CSS alone - no re-render per mouse move.
+  const onPointerMove = useCallback((event: PointerEvent<HTMLElement>) => {
+    const el = event.currentTarget;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--spot-x", `${event.clientX - rect.left}px`);
+    el.style.setProperty("--spot-y", `${event.clientY - rect.top}px`);
+  }, []);
+
   return (
     <Tag
       ref={ref}
-      className={`reveal ${shown ? "in-view" : ""} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      data-variant={variant}
+      className={`reveal ${shown ? "in-view" : ""} ${
+        spotlight ? "spotlight" : ""
+      } ${className}`}
+      // Passed as a custom property, not `transitionDelay`, so the stylesheet
+      // can zero it out on hover - an inline declaration could not be beaten.
+      style={
+        delay ? ({ "--reveal-delay": `${delay}ms` } as React.CSSProperties) : undefined
+      }
+      onPointerMove={spotlight ? onPointerMove : undefined}
     >
       {children}
     </Tag>
