@@ -39,49 +39,130 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // Lock body scroll while the mobile menu is open.
+  // Lock body scroll and allow Escape to dismiss while the mobile menu is open.
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [open]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled
-          ? "border-b border-border bg-background/80 backdrop-blur-md"
-          : "border-b border-transparent"
-        }`}
-    >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" className="group flex items-center gap-2 font-semibold">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-mono text-sm text-accent-foreground shadow-sm">
-            <Image
-              src="/hammad-logo.png"
-              width={500}
-              height={500}
-              alt="logo"
-            />
-          </span>
-          <span className="text-[15px] tracking-tight">
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled
+            ? "border-b border-border bg-background/80 backdrop-blur-md"
+            : "border-b border-transparent"
+          }`}
+      >
+        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+          <a href="#top" className="group flex items-center gap-2 font-semibold">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-mono text-sm text-accent-foreground shadow-sm">
+              <Image
+                src="/hammad-logo.png"
+                width={500}
+                height={500}
+                alt="logo"
+              />
+            </span>
+            <span className="text-[15px] tracking-tight">
+              {profile.firstName}
+              <span className="text-accent">.</span>
+            </span>
+          </a>
+
+          {/* Desktop links */}
+          <ul className="hidden items-center gap-1 md:flex">
+            {navLinks.map((link) => {
+              const id = link.href.slice(1);
+              const isActive = active === id;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${isActive
+                        ? "text-accent"
+                        : "text-muted hover:text-foreground"
+                      }`}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="flex items-center gap-2">
+            <a
+              href="#contact"
+              className="hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5 sm:inline-block"
+            >
+              Let&apos;s talk
+            </a>
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-card-hover md:hidden"
+            >
+              {open ? <Close className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Backdrop and drawer sit outside <header> on purpose: the header sets
+          `backdrop-blur-md` once scrolled, and an ancestor with a backdrop
+          filter becomes the backdrop root, which would stop the overlay from
+          blurring the page behind it. */}
+      <div
+        aria-hidden
+        onClick={() => setOpen(false)}
+        className={`fixed inset-0 z-[60] bg-black/40 backdrop-blur-lg transition-opacity duration-300 md:hidden ${open ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+      />
+
+      {/* Mobile menu: a side drawer that slides in from the right. */}
+      <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        className={`fixed right-0 top-0 z-[70] flex h-dvh w-72 max-w-[82%] flex-col border-l border-border bg-background shadow-2xl transition-transform duration-300 ease-out md:hidden ${open ? "translate-x-0" : "translate-x-full"
+          }`}
+      >
+        <div className="flex h-16 items-center justify-between border-b border-border px-5">
+          <span className="text-[15px] font-semibold tracking-tight">
             {profile.firstName}
             <span className="text-accent">.</span>
           </span>
-        </a>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-card-hover"
+          >
+            <Close className="h-5 w-5" />
+          </button>
+        </div>
 
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
           {navLinks.map((link) => {
-            const id = link.href.slice(1);
-            const isActive = active === id;
+            const isActive = active === link.href.slice(1);
             return (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${isActive
-                      ? "text-accent"
-                      : "text-muted hover:text-foreground"
+                  onClick={() => setOpen(false)}
+                  className={`block rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-card-hover hover:text-foreground ${isActive ? "text-accent" : "text-muted"
                     }`}
                 >
                   {link.label}
@@ -91,54 +172,16 @@ export default function Navbar() {
           })}
         </ul>
 
-        <div className="flex items-center gap-2">
+        <div className="border-t border-border p-4">
           <a
             href="#contact"
-            className="hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5 sm:inline-block"
+            onClick={() => setOpen(false)}
+            className="block rounded-full bg-accent px-4 py-3 text-center text-base font-medium text-accent-foreground"
           >
             Let&apos;s talk
           </a>
-          <ThemeToggle />
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-card-hover md:hidden"
-          >
-            {open ? <Close className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        className={`overflow-hidden border-border bg-background/95 backdrop-blur-md transition-[max-height,opacity] duration-300 md:hidden ${open ? "max-h-96 border-b opacity-100" : "max-h-0 opacity-0"
-          }`}
-      >
-        <ul className="flex flex-col gap-1 px-5 py-4">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-2.5 text-base font-medium text-muted transition-colors hover:bg-card-hover hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-          <li>
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-2 block rounded-lg bg-accent px-3 py-2.5 text-center text-base font-medium text-accent-foreground"
-            >
-              Let&apos;s talk
-            </a>
-          </li>
-        </ul>
       </div>
-    </header>
+    </>
   );
 }
