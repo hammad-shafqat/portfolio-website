@@ -79,12 +79,12 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Database & Cloud",
     icon: "database",
-    skills: ["MongoDB", "Mongoose", "PostgreSQL", "Prisma", "Redis"],
+    skills: ["MongoDB", "Mongoose", "PostgreSQL", "Prisma", "Redis", "DigitalOcean"],
   },
   {
     title: "Tooling & Practices",
     icon: "wrench",
-    skills: ["Git", "GitHub", "Jira", "Vercel", "Netlify", "Cloudinary", "Stripe"],
+    skills: ["Git", "GitHub", "Jira", "Postman", "Vercel", "Netlify", "Cloudinary", "Stripe"],
   },
 ];
 

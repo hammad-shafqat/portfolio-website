@@ -1,6 +1,7 @@
 import type { ComponentType, SVGProps } from "react";
 import {
   SiCloudinary,
+  SiDigitalocean,
   SiExpress,
   SiFramer,
   SiGit,
@@ -12,6 +13,7 @@ import {
   SiNextdotjs,
   SiNodedotjs,
   SiPostgresql,
+  SiPostman,
   SiPrisma,
   SiReact,
   SiRedis,
@@ -55,6 +57,7 @@ export const techLogos: Record<string, Logo> = {
   PostgreSQL: SiPostgresql,
   Prisma: SiPrisma,
   Redis: SiRedis,
+  DigitalOcean: SiDigitalocean,
 
   // Tooling
   Git: SiGit,
@@ -64,6 +67,7 @@ export const techLogos: Record<string, Logo> = {
   Netlify: SiNetlify,
   Cloudinary: SiCloudinary,
   Stripe: SiStripe,
+  Postman: SiPostman,
 };
 
 /* Short monogram for skills that have no brand mark of their own. */
