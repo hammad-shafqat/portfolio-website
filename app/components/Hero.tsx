@@ -82,6 +82,7 @@ export default function Hero() {
             </a>
             <a
               href={profile.resumeUrl}
+              target="_blank"
               className="group inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card-hover active:scale-95"
             >
               <Download className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />

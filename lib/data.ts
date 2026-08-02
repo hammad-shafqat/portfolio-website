@@ -23,7 +23,7 @@ export const profile = {
   availability: "Contact for freelance & full-time roles",
   email: contactEmail,
   phone: contactPhone,
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "https://drive.google.com/file/d/19fPaAhCbi3PlpxwzV07EmQaaIPlwbfCq/view?usp=sharing",
   avatar: "/profile.jpeg", // add a path like "/avatar.jpg" - falls back to initials if empty
 } as const;
 
@@ -150,16 +150,16 @@ export const projects: Project[] = [
     accent: "from-emerald-500 to-teal-400",
     image: "/project_3_demo.jpg",
   },
-  {
-    title: "Work Syn Pro",
-    description:
-      "An open-source, accessible React component library with 40+ components, dark mode, and full keyboard support. 1.2k stars and growing.",
-    tags: [ "JavaScript", "Node.js", "Express.js", "MongoDB", "Mongoose"],
-    // liveUrl: "https://github.com/hammad-shafqat/worksyncpro",
-    repoUrl: "https://github.com/hammad-shafqat/worksyncpro",
-    year: "2026",
-    accent: "from-amber-500 to-orange-500",
-  },
+  // {
+  //   title: "Work Syn Pro",
+  //   description:
+  //     "An open-source, accessible React component library with 40+ components, dark mode, and full keyboard support. 1.2k stars and growing.",
+  //   tags: [ "JavaScript", "Node.js", "Express.js", "MongoDB", "Mongoose"],
+  //   // liveUrl: "https://github.com/hammad-shafqat/worksyncpro",
+  //   repoUrl: "https://github.com/hammad-shafqat/worksyncpro",
+  //   year: "2026",
+  //   accent: "from-amber-500 to-orange-500",
+  // },
 
 ];
 
