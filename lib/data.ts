@@ -23,7 +23,7 @@ export const profile = {
   availability: "Contact for freelance & full-time roles",
   email: contactEmail,
   phone: contactPhone,
-  resumeUrl: "https://drive.google.com/file/d/19fPaAhCbi3PlpxwzV07EmQaaIPlwbfCq/view?usp=sharing",
+  resumeUrl: "https://drive.google.com/file/d/1gbZAGrI26ocZ6OkGTWynapuqgxlbko3P/view?usp=sharing",
   avatar: "/profile.jpeg", // add a path like "/avatar.jpg" - falls back to initials if empty
 } as const;
 
