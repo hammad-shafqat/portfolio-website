@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Sans } from "next/font/google";
+import { Roboto, Urbanist } from "next/font/google";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
+const display = Urbanist({
   variable: "--font-display-face",
   subsets: ["latin"],
-  axes: ["opsz", "wdth"],
 });
 
-const body = IBM_Plex_Sans({
+const body = Roboto({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {

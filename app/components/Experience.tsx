@@ -9,7 +9,7 @@ export default function Experience() {
       className="scroll-mt-20 border-t border-border bg-surface-sunk py-20 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
-        <h2 className="display text-5xl sm:text-6xl">Experience</h2>
+        <h2 className="display display-strong text-[2rem] sm:text-[2.5rem]">Experience</h2>
 
         <ol className="mt-14">
           {experiences.map((exp) => {
@@ -33,7 +33,7 @@ export default function Experience() {
                 </div>
 
                 <div>
-                  <h3 className="display-sm text-2xl">
+                  <h3 className="display-sm text-xl sm:text-2xl">
                     {exp.role}, {exp.company}
                   </h3>
                   <p className="mt-3 max-w-[64ch] text-muted">{exp.description}</p>

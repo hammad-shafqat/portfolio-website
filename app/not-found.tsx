@@ -6,7 +6,7 @@ export default function NotFound() {
     <main className="flex flex-1 items-center px-4 py-24 sm:px-8">
       <div className="mx-auto w-full max-w-6xl">
         <p className="text-muted">Error 404</p>
-        <h1 className="display mt-3 max-w-[14ch] text-5xl sm:text-7xl">
+        <h1 className="display mt-3 max-w-[14ch] text-4xl sm:text-5xl">
           There&apos;s no page at this address.
         </h1>
         <p className="mt-6 max-w-[52ch] text-lg text-muted">

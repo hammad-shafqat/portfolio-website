@@ -24,7 +24,7 @@ export default function Hero() {
             {profile.availability}
           </p>
 
-          <h1 className="display mt-6 text-[2.75rem] sm:text-6xl lg:text-[4.5rem]">
+          <h1 className="display display-strong mt-6 text-[2rem] sm:text-[2.75rem] lg:text-[2.875rem]">
             <span className="hero-line block" style={{ "--i": 1 } as React.CSSProperties}>
               I build web apps
             </span>

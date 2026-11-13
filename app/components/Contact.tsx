@@ -19,7 +19,7 @@ export default function Contact() {
   return (
     <section id="contact" className="scroll-mt-20 border-t border-border py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
-        <h2 className="display max-w-[14ch] text-5xl sm:text-7xl">
+        <h2 className="display max-w-[14ch] text-4xl sm:text-5xl">
           Have a project or a role in mind?
         </h2>
         <p className="mt-6 max-w-[52ch] text-lg text-muted">

@@ -136,7 +136,7 @@ export const projects: Project[] = [
     featured: true,
     year: "2026",
     accent: "from-sky-500 to-cyan-400",
-    image: "/project_2_demo.jpg",
+    image: "/project_2_demo.png",
   },
   {
     title: "Stay In",

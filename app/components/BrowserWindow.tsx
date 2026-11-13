@@ -33,18 +33,21 @@ export default function BrowserWindow({
           {host}
         </span>
       </div>
-      <div className="relative aspect-[16/10] bg-surface-sunk">
-        {src && (
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes={sizes}
-            priority={priority}
-            className="object-cover object-top"
-          />
-        )}
-      </div>
+      {/* Rendered at the screenshot's own aspect ratio (width/height 0 + auto
+          height), so nothing is cropped whatever size the capture is. */}
+      {src ? (
+        <Image
+          src={src}
+          alt={alt}
+          width={0}
+          height={0}
+          sizes={sizes}
+          priority={priority}
+          className="block h-auto w-full bg-surface-sunk"
+        />
+      ) : (
+        <div className="aspect-[16/10] bg-surface-sunk" />
+      )}
     </div>
   );
 }

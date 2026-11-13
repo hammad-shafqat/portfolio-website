@@ -27,7 +27,7 @@ export default function About() {
         </div>
 
         <div>
-          <h2 className="display text-5xl sm:text-6xl">About</h2>
+          <h2 className="display display-strong text-[2rem] sm:text-[2.5rem]">About</h2>
           <div className="mt-6 max-w-[62ch] space-y-4 text-muted">
             <p>
               I&apos;m a full stack engineer based in {profile.location}. I like

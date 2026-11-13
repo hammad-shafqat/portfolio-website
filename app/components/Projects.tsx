@@ -29,7 +29,7 @@ function CaseStudy({ project, flip }: { project: Project; flip: boolean }) {
 
       <div className="lg:col-span-5">
         <p className="text-sm text-muted">{project.year}</p>
-        <h3 className="display-sm mt-1 text-3xl sm:text-[2.25rem]">
+        <h3 className="display-sm mt-1 text-2xl sm:text-3xl">
           {project.title}
         </h3>
         <p className="mt-4 max-w-[60ch] text-muted">{project.description}</p>
@@ -73,7 +73,7 @@ export default function Projects() {
     <section id="projects" className="scroll-mt-20 border-t border-border py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 className="display text-5xl sm:text-6xl">Selected work</h2>
+          <h2 className="display display-strong text-[2rem] sm:text-[2.5rem]">Selected work</h2>
           <a
             href="https://github.com/hammad-shafqat"
             target="_blank"

@@ -5,7 +5,7 @@ export default function Skills() {
   return (
     <section id="skills" className="scroll-mt-20 border-t border-border py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
-        <h2 className="display text-5xl sm:text-6xl">Skills</h2>
+        <h2 className="display display-strong text-[2rem] sm:text-[2.5rem]">Skills</h2>
         <p className="mt-4 max-w-[52ch] text-muted">
           What I use day to day to design, build and run products.
         </p>
