@@ -1,69 +1,85 @@
 import { experiences } from "@/lib/data";
-import Reveal from "./Reveal";
-import SectionHeading from "./SectionHeading";
+
+const VISIBLE = 3;
 
 export default function Experience() {
   return (
     <section
       id="experience"
-      className="scroll-mt-24 bg-background-secondary py-20 sm:py-28"
+      className="scroll-mt-20 border-t border-border bg-surface-sunk py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-4xl px-5 sm:px-8">
-        <SectionHeading
-          eyebrow="Career"
-          title="Where I've worked"
-          description="Building scalable products, delivering full-stack solutions, and continuously growing."
-        />
+      <div className="mx-auto max-w-6xl px-4 sm:px-8">
+        <h2 className="display text-5xl sm:text-6xl">Experience</h2>
 
-        <ol className="relative mt-14 border-l border-border pl-8 sm:pl-10">
-          {/* Accent rule that draws down over the static border as the list
-              scrolls into view. `-left-px` lines it up with that border. */}
-          <Reveal
-            variant="line"
-            className="absolute -left-px top-0 h-full w-px bg-gradient-to-b from-accent via-accent/60 to-transparent"
-          />
+        <ol className="mt-14">
+          {experiences.map((exp) => {
+            const shown = exp.highlights.slice(0, VISIBLE);
+            const rest = exp.highlights.slice(VISIBLE);
+            const current = /present/i.test(exp.period);
+            return (
+              <li
+                key={`${exp.company}-${exp.period}`}
+                className="grid gap-3 border-l-2 border-border pb-14 pl-6 last:pb-0 md:grid-cols-[13rem_1fr] md:gap-10 md:border-l-0 md:pl-0"
+              >
+                <div className="md:border-r-2 md:border-border md:pr-6 md:text-right">
+                  <p className="text-sm font-medium">{exp.period}</p>
+                  <p className="text-sm text-muted">{exp.location}</p>
+                  {current && (
+                    <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-accent">
+                      <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      Current role
+                    </p>
+                  )}
+                </div>
 
-          {experiences.map((exp, i) => (
-            <Reveal
-              as="li"
-              key={`${exp.company}-${exp.period}`}
-              delay={i * 90}
-              className="relative pb-12 last:pb-0"
-            >
-              {/* Node on the line */}
-              <span className="node-ping absolute -left-[41px] top-1 grid h-5 w-5 place-items-center rounded-full border border-border bg-background sm:-left-[49px]">
-                <span className="h-2 w-2 rounded-full bg-accent" />
-              </span>
+                <div>
+                  <h3 className="display-sm text-2xl">
+                    {exp.role}, {exp.company}
+                  </h3>
+                  <p className="mt-3 max-w-[64ch] text-muted">{exp.description}</p>
 
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-lg font-semibold tracking-tight">
-                  {exp.role}
-                  <span className="text-accent"> · {exp.company}</span>
-                </h3>
-                <span className="font-mono text-xs text-muted">
-                  {exp.period}
-                </span>
-              </div>
-              <p className="mt-0.5 text-sm text-muted">{exp.location}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted">
-                {exp.description}
-              </p>
+                  <ul className="mt-5 max-w-[64ch] space-y-2.5 text-[15px]">
+                    {shown.map((h) => (
+                      <Highlight key={h}>{h}</Highlight>
+                    ))}
+                  </ul>
 
-              <ul className="mt-4 space-y-2">
-                {exp.highlights.map((h) => (
-                  <li
-                    key={h}
-                    className="flex gap-2.5 text-sm leading-relaxed text-muted"
-                  >
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/70" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
+                  {rest.length > 0 && (
+                    <details className="mt-2.5 max-w-[64ch]">
+                      <summary className="inline-flex items-center gap-1.5 rounded py-1 text-sm font-semibold text-accent">
+                        Show {rest.length} more
+                        <svg
+                          aria-hidden
+                          viewBox="0 0 16 16"
+                          className="chevron h-3.5 w-3.5 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="m4 6 4 4 4-4" />
+                        </svg>
+                      </summary>
+                      <ul className="mt-2.5 space-y-2.5 text-[15px]">
+                        {rest.map((h) => (
+                          <Highlight key={h}>{h}</Highlight>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                </div>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>
+  );
+}
+
+function Highlight({ children }: { children: React.ReactNode }) {
+  return (
+    <li className="relative pl-5 before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-2.5 before:bg-accent">
+      {children}
+    </li>
   );
 }

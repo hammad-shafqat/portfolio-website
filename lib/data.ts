@@ -20,7 +20,7 @@ export const profile = {
   summary:
     "Full Stack Engineer specializing in the MERN stack and Next.js. I turn ambitious ideas into production-grade products - from pixel-perfect interfaces to resilient APIs and databases that scale.",
   location: "Islamabad, Pakistan",
-  availability: "Contact for freelance & full-time roles",
+  availability: "Open to freelance and full-time roles",
   email: contactEmail,
   phone: contactPhone,
   resumeUrl: "https://drive.google.com/file/d/1gbZAGrI26ocZ6OkGTWynapuqgxlbko3P/view?usp=sharing",
@@ -249,9 +249,24 @@ export const services: Service[] = [
 ];
 
 export const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
+  { label: "Work", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Skills", href: "#skills" },
+  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ] as const;
+
+/** Anchor id for a project's case study, e.g. "vizion-autos". */
+export function projectSlug(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+/** "https://stayinnow.vercel.app/" -> "stayinnow.vercel.app" */
+export function hostOf(url?: string) {
+  if (!url) return "";
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return url;
+  }
+}

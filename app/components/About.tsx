@@ -1,87 +1,57 @@
-import { profile, services } from "@/lib/data";
-import { iconMap, type IconKey } from "./icons";
-import Reveal from "./Reveal";
-import SectionHeading from "./SectionHeading";
+import { profile, services, stats } from "@/lib/data";
 
 export default function About() {
   return (
-    <section id="about" className="scroll-mt-24 py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          {/* Left: portrait / initials card */}
-          <Reveal variant="scale" className="lg:sticky lg:top-28 lg:self-start">
-            <div className="group relative">
-              <div className="aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-accent/15 via-card to-fuchsia-500/10">
-                {profile.avatar ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={profile.avatar}
-                    alt={profile.name}
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  />
-                ) : (
-                  <div className="grid h-full w-full place-items-center">
-                    <span className="select-none font-mono text-8xl font-bold text-accent/70">
-                      {profile.firstName[0]}
-                      {profile.name.split(" ")[1]?.[0] ?? ""}
-                    </span>
-                  </div>
-                )}
-              </div>
-              <div className="animate-float absolute -bottom-5 -right-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-xl shadow-black/5">
-                <div className="text-2xl font-bold gradient-text">1.5+yrs</div>
-                <div className="text-xs text-muted">of building</div>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Right: copy + services */}
-          <div>
-            <SectionHeading
-              eyebrow="About me"
-              title="Turning complex problems into elegant products."
+    <section
+      id="about"
+      className="scroll-mt-20 border-t border-border bg-surface-sunk py-20 sm:py-28"
+    >
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-8 lg:grid-cols-[22rem_1fr] lg:gap-16">
+        <div>
+          {profile.avatar && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={profile.avatar}
+              alt={`Portrait of ${profile.name}`}
+              className="aspect-[4/5] w-full max-w-[22rem] rounded-[10px] border border-border object-cover"
             />
-            <Reveal
-              variant="blur"
-              className="mt-6 space-y-4 text-base leading-relaxed text-muted"
-            >
-              <p>
-                I&apos;m a full stack engineer based in {profile.location}, with
-                a passion for building web applications that are fast, reliable,
-                and a joy to use. I care deeply about the details - clean code,
-                thoughtful UX, and performance that holds up under real-world
-                load.
-              </p>
-              <p>
-                Over the last 1.5+years I&apos;ve worked on freelance projects also with startups and
-                agencies to ship products end-to-end: designing APIs, modelling
-                data, and crafting interfaces that feel effortless. I thrive in
-                collaborative teams and love mentoring other developers.
-              </p>
-            </Reveal>
+          )}
+          <dl className="mt-6 grid max-w-[22rem] grid-cols-2 gap-x-6 gap-y-4">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <dt className="text-sm text-muted">{s.label}</dt>
+                <dd className="display-sm text-2xl tabular-nums">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              {services.map((service, i) => {
-                const Icon = iconMap[service.icon as IconKey];
-                return (
-                  <Reveal
-                    key={service.title}
-                    delay={i * 80}
-                    spotlight
-                    className="group rounded-2xl border border-border bg-card p-5 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-card-hover"
-                  >
-                    <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="mt-4 font-semibold">{service.title}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                      {service.description}
-                    </p>
-                  </Reveal>
-                );
-              })}
-            </div>
+        <div>
+          <h2 className="display text-5xl sm:text-6xl">About</h2>
+          <div className="mt-6 max-w-[62ch] space-y-4 text-muted">
+            <p>
+              I&apos;m a full stack engineer based in {profile.location}. I like
+              owning a product from the database schema to the last pixel, and I
+              care about the parts users never see: auth that holds up, payments
+              that reconcile, and pages that load fast on a bad connection.
+            </p>
+            <p>
+              For the last 1.5+ years I&apos;ve worked with startups, agencies
+              and freelance clients, designing APIs, modelling data and building
+              the interfaces on top. I work well in small teams and enjoy helping
+              other developers level up.
+            </p>
           </div>
+
+          <h3 className="display-sm mt-12 text-2xl">How I can help</h3>
+          <dl className="mt-5 grid max-w-3xl gap-x-10 gap-y-6 sm:grid-cols-2">
+            {services.map((service) => (
+              <div key={service.title} className="border-t-2 border-accent pt-3">
+                <dt className="font-semibold">{service.title}</dt>
+                <dd className="mt-1 text-[15px] text-muted">{service.description}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
